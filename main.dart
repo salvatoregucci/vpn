@@ -1089,6 +1089,36 @@ class _InfoRow extends StatelessWidget {
       );
 }
 
+class _GlassPanel extends StatelessWidget {
+  const _GlassPanel({
+    super.key,
+    required this.child,
+    this.radius = 18,
+  });
+
+  final Widget child;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) => ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xB815111F),
+              borderRadius: BorderRadius.circular(radius),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.13),
+                width: 1,
+              ),
+            ),
+            child: child,
+          ),
+        ),
+      );
+}
+
 class _Action extends StatelessWidget {
   const _Action({
     required this.icon,
