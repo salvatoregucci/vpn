@@ -156,9 +156,9 @@ class _AppShellState extends State<AppShell> {
         backgroundColor: _background,
         body: SafeArea(
           child: Container(
-            decoration: BoxDecoration(border: Border.all(color: accent, width: 1.4), borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(border: Border.all(color: accent, width: 1.4), borderRadius: BorderRadius.circular(24)),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(24),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(18, 8, 18, 8),
                 child: Column(
@@ -1135,12 +1135,11 @@ class _Action extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(BuildContext context) => Material(
-        color: _surface,
-        borderRadius: BorderRadius.circular(14),
+  Widget build(BuildContext context) => _GlassPanel(
+        radius: 18,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(18),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             child: Row(
@@ -1152,10 +1151,19 @@ class _Action extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(title, style: const TextStyle(color: _text, fontWeight: FontWeight.w600)),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          color: _text,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       if (subtitle != null) ...[
                         const SizedBox(height: 4),
-                        Text(subtitle!, style: const TextStyle(color: _muted, fontSize: 12)),
+                        Text(
+                          subtitle!,
+                          style: const TextStyle(color: _muted, fontSize: 12),
+                        ),
                       ],
                     ],
                   ),
@@ -1194,21 +1202,32 @@ class _Picker extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) => Material(
-        color: _surface,
-        borderRadius: BorderRadius.circular(14),
+  Widget build(BuildContext context) => _GlassPanel(
+        radius: 18,
         child: InkWell(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(18),
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             child: Row(
               children: [
                 Expanded(
-                  child: Text(label, style: const TextStyle(color: _text, fontWeight: FontWeight.w600)),
+                  child: Text(
+                    label,
+                    style: const TextStyle(
+                      color: _text,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 12),
-                Text(value, style: TextStyle(color: accent, fontWeight: FontWeight.w600)),
+                Text(
+                  value,
+                  style: TextStyle(
+                    color: accent,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
                 const SizedBox(width: 8),
                 const Icon(Icons.chevron_right, color: _muted),
               ],
