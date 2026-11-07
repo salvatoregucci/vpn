@@ -57,6 +57,7 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+        country_flags: ^3.2.0
 
       - name: Build Windows release
         run: flutter build windows --release
