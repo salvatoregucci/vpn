@@ -972,7 +972,7 @@ _Action(
         ],
       );
 
-  String _modeEn(String value) => switch (value) {
+    String _modeEn(String value) => switch (value) {
         'Туннель' => 'Tunnel',
         'Автоматический' => 'Automatic',
         'Сплит-туннель' => 'Split tunnel',
@@ -1067,6 +1067,7 @@ _Action(
       ),
     );
   }
+}
 
 class _InfoRow extends StatelessWidget {
   const _InfoRow({required this.label, required this.value});
