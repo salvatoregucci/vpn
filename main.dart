@@ -267,16 +267,27 @@ class _AppHeader extends StatelessWidget {
 }
 
 class VpnServer {
-  const VpnServer(this.country, this.flag, this.city, this.cityEn);
-  final String country, flag, city, cityEn;
+  const VpnServer(
+    this.country,
+    this.countryCode,
+    this.flag,
+    this.city,
+    this.cityEn,
+  );
+
+  final String country;
+  final String countryCode;
+  final String flag;
+  final String city;
+  final String cityEn;
 }
 
 const _servers = <VpnServer>[
-  VpnServer('США', '🇺🇸', 'Нью-Йорк', 'New York'),
-  VpnServer('Германия', '🇩🇪', 'Берлин', 'Berlin'),
-  VpnServer('Нидерланды', '🇳🇱', 'Амстердам', 'Amsterdam'),
-  VpnServer('Швеция', '🇸🇪', 'Стокгольм', 'Stockholm'),
-  VpnServer('Япония', '🇯🇵', 'Токио', 'Tokyo'),
+  VpnServer('США', 'US', '🇺🇸', 'Нью-Йорк', 'New York'),
+  VpnServer('Германия', 'DE', '🇩🇪', 'Берлин', 'Berlin'),
+  VpnServer('Нидерланды', 'NL', '🇳🇱', 'Амстердам', 'Amsterdam'),
+  VpnServer('Швеция', 'SE', '🇸🇪', 'Стокгольм', 'Stockholm'),
+  VpnServer('Япония', 'JP', '🇯🇵', 'Токио', 'Tokyo'),
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -346,7 +357,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
             for (final server in _servers)
               ListTile(
-                leading: Text(server.flag, style: const TextStyle(fontSize: 26)),
+                leading: CountryFlag.fromCountryCode(
+  server.countryCode,
+  height: 24,
+  width: 34,
+),
                 title: Text(widget.english ? _countryEn(server.country) : server.country, style: const TextStyle(color: _text)),
                 subtitle: Text(widget.english ? server.cityEn : server.city, style: const TextStyle(color: _muted)),
                 trailing: server.country == _server.country ? Icon(Icons.check_circle, color: widget.accent) : null,
@@ -444,7 +459,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Row(children: [
               Icon(Icons.bolt_rounded, color: widget.accent),
               const SizedBox(width: 10),
-              Text(_server.flag, style: const TextStyle(fontSize: 24)),
+              CountryFlag.fromCountryCode(
+  _server.countryCode,
+  height: 20,
+  width: 30,
+),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
