@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io' show Platform, exit;
 import 'dart:math' as math;
+import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
