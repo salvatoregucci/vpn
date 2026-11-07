@@ -61,7 +61,7 @@ jobs:
       - name: Build Windows release
         run: flutter build windows --release
 
-      - name: Upload Windows app
+      - name: Upload Windows app artifact
         uses: actions/upload-artifact@v4
         with:
           name: SpiderVPN-Windows-Demo
