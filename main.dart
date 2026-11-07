@@ -991,31 +991,72 @@ _Action(
       context: context,
       isScrollControlled: true,
       backgroundColor: _surface,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
       builder: (context) => StatefulBuilder(
         builder: (context, refresh) => SafeArea(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(18, 18, 18, 18 + MediaQuery.viewInsetsOf(context).bottom),
+            padding: EdgeInsets.fromLTRB(
+              18,
+              18,
+              18,
+              18 + MediaQuery.viewInsetsOf(context).bottom,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
                   t('Конфиденциальность', 'Privacy'),
-                  style: const TextStyle(color: _text, fontSize: 20, fontWeight: FontWeight.w700),
+                  style: const TextStyle(
+                    color: _text,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  t('Логин, пароль, Gmail и номер телефона', 'Username, password, Gmail and phone'),
+                  t(
+                    'Управление логином, паролем и Gmail',
+                    'Manage your username, password and Gmail',
+                  ),
                   style: const TextStyle(color: _muted),
                 ),
                 const SizedBox(height: 18),
-                _InfoRow(label: 'Login', value: _login),
-                if (_gmail != null) _InfoRow(label: 'Gmail', value: _gmail!),
-                if (_phone != null) _InfoRow(label: 'Phone', value: _phone!),
+                _Action(
+                  icon: Icons.person_outline_rounded,
+                  title: t('Сменить логин', 'Change username'),
+                  subtitle: _login,
+                  accent: widget.accent,
+                  onTap: () async {
+                    await _changeLogin();
+                    refresh(() {});
+                  },
+                ),
+                const SizedBox(height: 8),
+                _Action(
+                  icon: Icons.lock_outline_rounded,
+                  title: t('Сменить пароль', 'Change password'),
+                  accent: widget.accent,
+                  onTap: _changePassword,
+                ),
+                const SizedBox(height: 8),
+                _Action(
+                  icon: Icons.email_outlined,
+                  title: t('Привязать Gmail', 'Link Gmail'),
+                  subtitle: _gmail ?? t('Не привязан', 'Not linked'),
+                  accent: widget.accent,
+                  onTap: () async {
+                    await _bindGmail();
+                    refresh(() {});
+                  },
+                ),
                 const SizedBox(height: 18),
                 FilledButton(
-                  style: FilledButton.styleFrom(backgroundColor: widget.accent),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: widget.accent,
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(t('Закрыть', 'Close')),
                 ),
@@ -1026,7 +1067,6 @@ _Action(
       ),
     );
   }
-}
 
 class _InfoRow extends StatelessWidget {
   const _InfoRow({required this.label, required this.value});
